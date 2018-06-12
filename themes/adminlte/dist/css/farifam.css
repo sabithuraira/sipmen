@@ -1,0 +1,188 @@
+.loading {
+  text-align: center;
+  display: none;
+}
+
+.event-title,
+.event-description {
+  display: block !important;
+}
+
+.event-title {
+  font-size: 16px !important;
+  font-weight: 600;
+}
+
+.event-description {
+  color: #999;
+  font-size: 13px;
+}
+
+
+.bg-gold {
+   background-color: #ffc500 !important;
+   color: #ffc500 !important;
+   margin-right: 2px;
+}
+
+.bg-silver {
+   background-color: #A0A7AD !important;
+   color: #A0A7AD !important;
+   margin-left: 10px;
+   margin-right: 2px;
+}
+
+.bg-bronze {
+   background-color: #BC7760 !important;
+   color: #BC7760 !important;
+   margin-left: 10px;
+   margin-right: 2px;
+}
+
+
+/*
+KLASEMEN COMPONENT
+*/
+
+td.klasemen-img img {
+  width: 20px;
+  height: 20px;
+}
+
+table.small-font{
+  font-size: 12px;
+}
+
+.small-font>tbody>tr>td, .small-font>tbody>tr>th, .small-font>tfoot>tr>td, .small-font>tfoot>tr>th, .small-font>thead>tr>td, .small-font>thead>tr>th {
+    padding: 3px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 0px solid #fff;
+}
+
+
+td.bpsnetral
+{
+  background-color: #3C8DBC;
+}
+
+td.bpsbad
+{
+  background-color: #FF3835;
+}
+
+td.bpsmedium
+{
+  background-color: #FFF138;
+}
+
+td.bpsgood
+{
+  background-color: #4CFF00;
+}
+
+
+.row-print{
+  margin-left: 35px;
+  margin-right: 35px;
+}
+
+.header-text{
+  margin-left: 30px;
+}
+
+.header-bps{
+  margin-top: 19px;
+  font-size: 20px !important;
+  font-style: italic;
+  font-weight: 600;
+}
+
+
+.header-unit{
+  margin-top: 3px;
+  font-size: 16px !important;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.sub-header{
+  margin-top:10px;
+  margin-bottom:20px;
+}
+
+.nama-ttd{
+  margin-top:60px;
+}
+
+#calendar{
+  background-color: #fff;
+  color: #000000 !important;
+}
+
+#loading, #jadwal-success, #jadwal-error, .table-hidden{
+  display: none;
+}
+
+td.uline {
+  text-decoration: underline;
+}
+
+td.w50 {
+  width: 50%;
+}
+
+.scrollme {
+  overflow-y: auto;
+}
+
+
+li.li1
+{
+  background-color: #DD5245;
+}
+
+li.li2
+{
+  background-color: #F5CD46;
+}
+
+li.li3
+{
+  background-color: #5BA05C;
+}
+
+li.li4
+{
+  background-color: #0E58E3;
+}
+
+
+tr.bps1 > td.color
+{
+  background-color: #DD5245;
+}
+
+tr.bps2 > td.color
+{
+  background-color: #F5CD46;
+}
+
+tr.bps3 > td.color
+{
+  background-color: #5BA05C;
+}
+
+tr.bps4 > td.color
+{
+  background-color: #0E58E3;
+}
+
+li > select.form-control
+{
+  margin-left: 2%;
+  margin-bottom: 4px;
+  margin-top: 3px;
+  text-align: center;
+  width: 96%;
+}
