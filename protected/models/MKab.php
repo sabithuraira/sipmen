@@ -35,6 +35,10 @@ class MKab extends CActiveRecord
 		);
 	}
 
+	public function getKodeNama(){
+		return "(".$this->idKab.") ".$this->nmKab;
+	}
+
 	/**
 	 * @return array relational rules.
 	 */

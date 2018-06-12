@@ -15,28 +15,43 @@
 
                   <?php
                     echo CHtml::dropDownList("prov_id", "16",
-                        CHtml::listData(MProv::model()->findAll(), "idProv", 'nmProv'),
+                        CHtml::listData(MProv::model()->findAll(), "idProv", "kodeNama"),
                         array('class'=>'form-control'));
                   ?>
                 </li>
                 <li>
                   <?php
-                    echo CHtml::dropDownList("kab_id", '',
-                        CHtml::listData(MKab::model()->findAll(), "idKab", 'nmKab'),
+                    echo CHtml::dropDownList("kab_id", $model->idKab,
+                        CHtml::listData(MKab::model()->findAll(), "idKab", 'kodeNama'),
                         array('empty'=>'- Semua Kabupaten -', 'class'=>'form-control'));
                   ?>
                 </li>
                 <li>
                   <?php
-                    echo CHtml::dropDownList("kec_id", '',
-                        array(),
+                    $data_kec = array();
+                    if($model->idKab!=null){
+                      $data_kec = CHtml::listData(
+                        MKec::model()->findAllByAttributes(array('idProv'=>'16', 'idKab'=>$model->idKab)),
+                        'idKec', 'kodeNama');
+                    }
+
+                    echo CHtml::dropDownList("kec_id", $model->idKec,
+                        $data_kec,
                         array('empty'=>'- Kecamatan -', 'class'=>'form-control'));
                   ?>
                 </li>
                 <li>
                   <?php
-                    echo CHtml::dropDownList("desa_id", '',
-                        array(),
+
+                    $data_desa = array();
+                    if($model->idKab!=null && $model->idKec!=null){
+                      $data_desa = CHtml::listData(
+                        MDesa::model()->findAllByAttributes(array('idProv'=>'16', 'idKab'=>$model->idKab, 'idKec'=>$model->idKec)),
+                        'idDesa', 'kodeNama');
+                    }
+                  
+                    echo CHtml::dropDownList("desa_id", $model->idDesa,
+                        $data_desa,
                         array('empty'=>'- Desa -', 'class'=>'form-control'));
                   ?>
                 </li>

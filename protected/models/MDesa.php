@@ -37,6 +37,10 @@ class MDesa extends CActiveRecord
 		);
 	}
 
+	public function getKodeNama(){
+		return "(".$this->idDesa.") ".$this->nmDesa;
+	}
+
 	/**
 	 * @return array relational rules.
 	 */

@@ -45,6 +45,10 @@ class MProv extends CActiveRecord
 		);
 	}
 
+	public function getKodeNama(){
+		return "(".$this->idProv.") ".$this->nmProv;
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

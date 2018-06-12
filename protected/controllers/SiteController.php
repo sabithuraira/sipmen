@@ -47,7 +47,7 @@ class SiteController extends Controller
 		$satu='';
 
 		$data=MKec::model()->findAllByAttributes(array('idProv'=>'16', 'idKab'=>$id));
-		$data=CHtml::listData($data,'idKec','nmKec');
+		$data=CHtml::listData($data,'idKec','kodeNama');
 	
 		$satu.= CHtml::tag('option', array('value'=>0),CHtml::encode('- Semua Kecamatan -'),true);
 
@@ -69,7 +69,7 @@ class SiteController extends Controller
 		$satu='';
 
 		$data=MDesa::model()->findAllByAttributes(array('idProv'=>'16', 'idKab'=>$id, 'idKec'=>$id2));
-		$data=CHtml::listData($data,'idDesa','nmDesa');
+		$data=CHtml::listData($data,'idDesa','kodeNama');
 
 		$satu.= CHtml::tag('option', array('value'=>0),CHtml::encode('- Semua Desa -'),true);
 	

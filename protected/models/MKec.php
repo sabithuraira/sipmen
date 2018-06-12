@@ -36,6 +36,11 @@ class MKec extends CActiveRecord
 		);
 	}
 
+
+	public function getKodeNama(){
+		return "(".$this->idKec.") ".$this->nmKec;
+	}
+
 	/**
 	 * @return array relational rules.
 	 */
