@@ -145,6 +145,50 @@ class MBs extends CActiveRecord
 		));
 	}
 
+	public function getLabelProv()
+	{
+		return "(16) SUMATERA SELATAN";
+	}
+
+	public function getLabelKab(){
+		$model = MKab::model()->findByAttributes(array('idProv'=>$this->idProv, 'idKab'=>$this->idKab));
+
+		return "(".$this->idKab.") ".$model->nmKab;
+	}
+
+	public function getLabelKec(){
+		$model = MKec::model()->findByAttributes(array('idProv'=>$this->idProv, 'idKab'=>$this->idKab, 'idKec'=>$this->idKec));
+
+		return "(".$this->idKec.") ".$model->nmKec;
+	}
+
+	public function getLabelDesa(){
+		$model = MDesa::model()->findByAttributes(array('idProv'=>$this->idProv, 'idKab'=>$this->idKab, 'idKec'=>$this->idKec, 'idDesa'=>$this->idDesa));
+
+		return "(".$this->idDesa.") ".$model->nmDesa;
+	}
+
+	public function getStatusTerimaLabel(){
+		if($this->status_terima==0)
+			return '<div class="label bg-red">BELUM TERIMA TU</div>';
+		else 
+			return '<div class="label bg-green">SUDAH TERIMA TU</div>';
+	}
+
+	public function getStatusKirimLabel(){
+		if($this->status_kirim==0)
+			return '<div class="label bg-red">BELUM KIRIM</div>';
+		else 
+			return '<div class="label bg-green">SUDAH KIRIM</div>';
+	}
+
+	public function getStatusEditLabel(){
+		if($this->status_terima==0)
+			return '<div class="label bg-red">BELUM EDIT</div>';
+		else 
+			return '<div class="label bg-green">SUDAH EDIT</div>';
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

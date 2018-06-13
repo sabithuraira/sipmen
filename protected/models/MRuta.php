@@ -14,6 +14,7 @@
  */
 class MRuta extends CActiveRecord
 {
+	//status 1=terima TU, 2=editing, 3=kirim, 4=terima provinsi, 9=drop
 	/**
 	 * @return string the associated database table name
 	 */
@@ -30,7 +31,7 @@ class MRuta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idProv, idKab, nobatch, noruta, namakrt, status, ket_status', 'required'),
+			array('idProv, idKab, nobatch, noruta, namakrt, status', 'required'),
 			array('idProv, idKab', 'length', 'max'=>2),
 			array('nobatch', 'length', 'max'=>9),
 			array('noruta', 'length', 'max'=>3),

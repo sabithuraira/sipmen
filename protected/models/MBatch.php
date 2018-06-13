@@ -12,6 +12,7 @@
  */
 class MBatch extends CActiveRecord
 {
+	//status 1=terima TU, 2=editing, 3=kirim, 4=terima provinsi
 	/**
 	 * @return string the associated database table name
 	 */
@@ -47,6 +48,29 @@ class MBatch extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+		);
+	}
+
+	public static function getNextBatch($id){
+		$total = MBatch::model()->countByAttributes(array('idKab'=>$id));
+		$nextNumber = $total + 1;
+
+		$label = '16'.$id;
+
+		if($nextNumber < 10)
+			$label .= '0000'.$nextNumber;
+		else if($nextNumber >=10 && $nextNumber< 100)
+			$label .= '000'.$nextNumber;
+		else if($nextNumber>=100 && $nextNumber< 1000)
+			$label .= '00'.$nextNumber;
+		else if($nextNumber>=1000 && $nextNumber< 10000)
+			$label .= '0'.$nextNumber;
+		else
+			$label .= $nextNumber; 
+
+		return array(
+			'nomor'	=>$nextNumber,
+			'label'	=>$label
 		);
 	}
 

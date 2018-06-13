@@ -155,44 +155,59 @@
                         'value'		=> function($data){ return $data->jml_eligible; }
                       ),
                       array(
+                        'header' =>'STATUS TERIMA',
+                        'type'=>'raw',
+                        'value'		=> function($data){ return $data->statusTerimaLabel."<br/>Jumlah: ".$data->jml_terima."<br/> Tanggal: ".$data->tgl_terima; },
+                      ),
+                      array(
                         'header' =>'STATUS EDIT',
                         'type'=>'raw',
-                        'value'		=> function($data){ return "<b>".$data->status_edit."</b><br/>Jumlah: ".$data->jml_edit."<br/>Jumlah Drop: ".$data->jml_drop."<br/> Tanggal: ".$data->tgl_edit; },
+                        'value'		=> function($data){ return $data->statusEditLabel."<br/>Jumlah: ".$data->jml_edit."<br/>Jumlah Drop: ".$data->jml_drop."<br/> Tanggal: ".$data->tgl_edit; },
                       ),
                       array(
                         'header' =>'STATUS KIRIM',
                         'type'=>'raw',
-                        'value'		=> function($data){ return "<b>".$data->status_terima."</b><br/>Jumlah: ".$data->jml_terima."<br/> Tanggal: ".$data->tgl_terima; },
+                        'value'		=> function($data){ return $data->statusKirimLabel."<br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim; },
                       ),
                       array(
-                        'header' =>'STATUS TERIMA',
+                        'header' =>'BATCH',
                         'type'=>'raw',
-                        'value'		=> function($data){ return "<b>".$data->status_kirim."</b><br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim; },
+                        'value'		=> function($data){ if($data->nomorbatch==0) return ''; else return $data->nomorbatch;  },
                       ),
-                      'nomor_batch',
                       array(
-                        'class'=>'CButtonColumn',
-                        'template' => '{view} {update} {delete}',
-                        'htmlOptions' => array('width' => 20),
-                        'buttons'=>array(
-                          'update'=>array(
-                            'url'=>function($data){
-                              return Yii::app()->createUrl("pegawai/update");
-                            },
-                          ),
-                          'view'=>array(
-                            'url'=>function($data){
-                              return Yii::app()->createUrl("pegawai/view");
-                            },
-                          ),
-                          'delete'=>array(
-                            'url'=>function($data){
-                              return Yii::app()->createUrl("pegawai/delete");
-                            },
-                            'label'=>'Hapus',
-                          ),
-                        ),
+                        'header' =>'Progress Penerimaan',
+                        'type'=>'raw',
+                        'value'		=> function($data){ return CHtml::link("Terima", array('site/terima', 'id'=>$data->nks_sutas)); },
                       ),
+                      array(
+                        'header' =>'Progress Edit',
+                        'type'=>'raw',
+                        'value'		=> function($data){ return CHtml::link("Edit", array('site/edit', 'id'=>$data->nks_sutas)); },
+                      ),
+                      
+                      // array(
+                      //   'class'=>'CButtonColumn',
+                      //   'template' => '{view} {update} {delete}',
+                      //   'htmlOptions' => array('width' => 20),
+                      //   'buttons'=>array(
+                      //     'update'=>array(
+                      //       'url'=>function($data){
+                      //         return Yii::app()->createUrl("pegawai/update");
+                      //       },
+                      //     ),
+                      //     'view'=>array(
+                      //       'url'=>function($data){
+                      //         return Yii::app()->createUrl("pegawai/view");
+                      //       },
+                      //     ),
+                      //     'delete'=>array(
+                      //       'url'=>function($data){
+                      //         return Yii::app()->createUrl("pegawai/delete");
+                      //       },
+                      //       'label'=>'Hapus',
+                      //     ),
+                      //   ),
+                      // ),
                     ),
                   )); 
                 ?>

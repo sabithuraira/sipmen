@@ -178,7 +178,7 @@ tr.bps4 > td.color
   background-color: #0E58E3;
 }
 
-li > select.form-control
+li > select.form-control, li > div.form-label
 {
   margin-left: 2%;
   margin-bottom: 4px;
