@@ -97,9 +97,13 @@
                             ));
 
                             if($existing_ruta!=null){
-                                echo '<tr><td><input type="text" value="'.$existing_ruta->namakrt.'" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="masukkan nama ruta"></input></td></tr>';
+                                echo '<tr><td><input type="text" value="'.$existing_ruta->namakrt.'" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="masukkan nama ruta"></input></td>';
+                                echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                                echo '</tr>';
                             }else{
-                                echo '<tr><td><input type="text" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="masukkan nama ruta"></input></td></tr>';    
+                                echo '<tr><td><input type="text" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="masukkan nama ruta"></input></td>';
+                                echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                                echo '</tr>'; 
                             }
                         }
                     } 

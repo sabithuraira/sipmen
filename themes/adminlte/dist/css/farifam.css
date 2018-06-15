@@ -186,3 +186,9 @@ li > select.form-control, li > div.form-label
   text-align: center;
   width: 96%;
 }
+
+.link-progres{
+  margin-top: 5px;
+  font-weight: 600;
+  text-decoration: underline;
+}

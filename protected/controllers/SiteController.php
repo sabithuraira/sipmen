@@ -53,8 +53,8 @@ class SiteController extends Controller
 
 		if(!$is_batch_baru){
 			$nextBatch = array(
-				'nomor'	=>$model_bs->nobatch,
-				'label'	=>$model_bs->nomorbatch
+				'nomor'	=>$model_bs->nomorbatch,
+				'label'	=>$model_bs->nobatch
 			);
 		}
 
@@ -64,8 +64,8 @@ class SiteController extends Controller
 				$model = new MBatch;
 				$model->idProv = $model_bs->idProv;
 				$model->idKab = $model_bs->idKab;
-				$model->nobatch = $nextBatch['nomor'];
-				$model->nomorbatch = $nextBatch['label'];
+				$model->nobatch = $nextBatch['label'];
+				$model->nomorbatch = $nextBatch['nomor'];
 				$model->status = '1';
 				if($model->save()){
 					$model_bs->status_terima = 1;
@@ -79,7 +79,7 @@ class SiteController extends Controller
 						$model_ruta = new MRuta;
 						$model_ruta->idProv = $model->idProv;
 						$model_ruta->idKab	= $model->idKab;
-						$model_ruta->nobatch = $model->nomorbatch;
+						$model_ruta->nobatch = $model->nobatch;
 						$model_ruta->noruta = $this->numberTo3String($i+1);
 						if($_POST['nama'.$i]=='')
 							$model_ruta->namakrt = 'NN';
@@ -151,8 +151,49 @@ class SiteController extends Controller
 
 	public function actionEdit($id){
 		$model_bs = $this->loadBS($id);
+		$nextBatch = array(
+			'nomor'	=>$model_bs->nomorbatch,
+			'label'	=>$model_bs->nobatch
+		);
+
+		if(isset($_POST['jumlah_ruta'])){
+			$total = 0;
+			for($i=0;$i<$model_bs->jml_terima;++$i){
+
+				if(isset($_POST['edit'.$i])){
+					///
+					$existing_ruta = MRuta::model()->findByAttributes(array(
+						'nobatch'	=>$nextBatch['label'],
+						'noruta'	=>$this->numberTo3String($i+1)
+					));
+					$existing_ruta->status = '2';
+					$existing_ruta->save();
+					$total+=1;
+					//
+				}
+			}
+
+			if($total>0){
+				$model_bs->status_edit ='1';
+				$model_bs->jml_edit =$total;
+				$model_bs->tgl_edit = date('Y-m-d');
+				$model_bs->save(false);
+
+				$batch = MBatch::model()->findByAttributes(array(
+					'nobatch'	=>$model_bs->nobatch
+				));
+				if($batch!=null){
+					$batch->status = '2';
+					$batch->save(false);
+				}
+			}
+
+			$this->redirect(array('site/index'));
+		}
+
 		$this->render('edit', array(
-			'model_bs'	=>$model_bs
+			'model_bs'	=>$model_bs,
+			'nextBatch'	=>$nextBatch,
 		));
 	}
 

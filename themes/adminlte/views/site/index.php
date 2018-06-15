@@ -157,34 +157,23 @@
                       array(
                         'header' =>'STATUS TERIMA',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusTerimaLabel."<br/>Jumlah: ".$data->jml_terima."<br/> Tanggal: ".$data->tgl_terima; },
+                        'value'		=> function($data){ return $data->statusTerimaLabel."<br/>Jumlah: ".$data->jml_terima."<br/> Tanggal: ".$data->tgl_terima."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/terima', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       array(
                         'header' =>'STATUS EDIT',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusEditLabel."<br/>Jumlah: ".$data->jml_edit."<br/>Jumlah Drop: ".$data->jml_drop."<br/> Tanggal: ".$data->tgl_edit; },
+                        'value'		=> function($data){ return $data->statusEditLabel."<br/>Jumlah: ".$data->jml_edit."<br/>Jumlah Drop: ".$data->jml_drop."<br/> Tanggal: ".$data->tgl_edit."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/edit', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       array(
                         'header' =>'STATUS KIRIM',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusKirimLabel."<br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim; },
+                        'value'		=> function($data){ return $data->statusKirimLabel."<br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/kirim', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       array(
                         'header' =>'BATCH',
                         'type'=>'raw',
-                        'value'		=> function($data){ if($data->nomorbatch==0) return ''; else return $data->nomorbatch;  },
+                        'value'		=> function($data){ return $data->nobatch;  },
                       ),
-                      array(
-                        'header' =>'Progress Penerimaan',
-                        'type'=>'raw',
-                        'value'		=> function($data){ return CHtml::link("Terima", array('site/terima', 'id'=>$data->nks_sutas)); },
-                      ),
-                      array(
-                        'header' =>'Progress Edit',
-                        'type'=>'raw',
-                        'value'		=> function($data){ return CHtml::link("Edit", array('site/edit', 'id'=>$data->nks_sutas)); },
-                      ),
-                      
                       // array(
                       //   'class'=>'CButtonColumn',
                       //   'template' => '{view} {update} {delete}',

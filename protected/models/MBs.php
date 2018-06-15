@@ -183,7 +183,7 @@ class MBs extends CActiveRecord
 	}
 
 	public function getStatusEditLabel(){
-		if($this->status_terima==0)
+		if($this->status_edit==0)
 			return '<div class="label bg-red">BELUM EDIT</div>';
 		else 
 			return '<div class="label bg-green">SUDAH EDIT</div>';
