@@ -176,6 +176,7 @@ class SiteController extends Controller
 			if($total>0){
 				$model_bs->status_edit ='1';
 				$model_bs->jml_edit =$total;
+				// $model_bs->jml_drop = 0;
 				$model_bs->tgl_edit = date('Y-m-d');
 				$model_bs->save(false);
 
@@ -192,6 +193,60 @@ class SiteController extends Controller
 		}
 
 		$this->render('edit', array(
+			'model_bs'	=>$model_bs,
+			'nextBatch'	=>$nextBatch,
+		));
+	}
+
+	public function actionKirim($id){
+		$model_bs = $this->loadBS($id);
+		$nextBatch = array(
+			'nomor'	=>$model_bs->nomorbatch,
+			'label'	=>$model_bs->nobatch
+		);
+
+		if(isset($_POST['jumlah_ruta'])){
+			$total = 0;
+
+			$all_ruta_edit = MRuta::model()->findAllByAttributes(
+				array(
+					'nobatch'	=>$nextBatch['label'],
+				),
+				array(
+					'condition' =>'status >=2',
+				)
+			);
+			
+			foreach($all_ruta_edit as $key=>$value){
+				if(isset($_POST['kirim'.$value['noruta']])){
+					///
+					$value->status = '3';
+					$value->save();
+					$total+=1;
+					//
+				}
+			}
+
+			if($total>0){
+				$model_bs->status_kirim ='1';
+				$model_bs->jml_kirim =$total;
+				// $model_bs->nmr_kirim =$total;
+				$model_bs->tgl_kirim = date('Y-m-d');
+				$model_bs->save(false);
+
+				$batch = MBatch::model()->findByAttributes(array(
+					'nobatch'	=>$model_bs->nobatch
+				));
+				if($batch!=null){
+					$batch->status = '3';
+					$batch->save(false);
+				}
+			}
+
+			$this->redirect(array('site/index'));
+		}
+
+		$this->render('kirim', array(
 			'model_bs'	=>$model_bs,
 			'nextBatch'	=>$nextBatch,
 		));

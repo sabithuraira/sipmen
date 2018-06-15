@@ -67,7 +67,7 @@
 
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Daftar Rumah Tangga</h3>
+              <h3 class="box-title">Daftar Rumah Tangga Diterima</h3>
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->

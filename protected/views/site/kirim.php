@@ -41,10 +41,10 @@
   )); ?>
   <div class="col-md-9">
     <?php 
-        if($nextBatch['label']==''){
+        if($model_bs->status_edit==''){
             echo '<div class="alert alert-danger alert-dismissible">
               <h4><i class="icon fa fa-ban"></i> Error!</h4>
-              NKS Ini belum melewati proses penerimaan di TU (Tata Usaha)</div>';
+              NKS Ini belum melewati proses Editing</div>';
         }
         else{
     ?>
@@ -66,7 +66,7 @@
 
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">Daftar Rumah Tangga Editing</h3>
+        <h3 class="box-title">Daftar Rumah Tangga Dikirim</h3>
         <!-- /.box-tools -->
       </div>
       <!-- /.box-header -->
@@ -82,34 +82,24 @@
           <table class="table table-hover table-striped">
             <tbody>
               <?php 
-                  for($i=0;$i<$model_bs->jml_terima;++$i){
-                      $noruta = '';
-                      if($i+1 < 10)
-                          $noruta = '00'.$i+1;
-                      else if($i+1 >=10 && $i+1< 100)
-                          $noruta = '0'.$i+1;
-                      else if($i+1>=100 && $i+1< 1000)
-                          $noruta = $i+1;
+                    $all_ruta_edit = MRuta::model()->findAllByAttributes(
+                        array(
+                            'nobatch'	=>$nextBatch['label'],
+                        ),
+                        array(
+                            'condition' =>'status >=2',
+                        )
+                    );
+                    
+                    foreach($all_ruta_edit as $key=>$value){
+                        $is_checked = '';
+                        if($value->status==3 OR $value->status==4)
+                            $is_checked='checked';
 
-                      $existing_ruta = MRuta::model()->findByAttributes(array(
-                          'nobatch'	=>$nextBatch['label'],
-                          'noruta'	=>$noruta
-                      ));
-
-                      if($existing_ruta!=null){
-                          $is_checked = '';
-                            if($existing_ruta->status>=2 && $existing_ruta->status<=4)
-                                $is_checked='checked';
-
-                          echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox" '.$is_checked.'></td><td>'.$existing_ruta->namakrt.'</td>';
-                          echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
-                          echo '</tr>';
-                      }else{
-                          echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox"></td><td></td>';
-                          echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
-                          echo '</tr>'; 
-                      }
-                  }
+                        echo '<tr><td><input id="kirim'.$value['noruta'].'" name="kirim'.$value['noruta'].'" type="checkbox" '.$is_checked.'></td><td>'.$value->namakrt.'</td>';
+                        echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                        echo '</tr>';
+                    }
               ?>
             </tbody>
           </table>
