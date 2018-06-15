@@ -118,6 +118,19 @@ class SiteController extends Controller
 						'nobatch'	=>$nextBatch['label'],
 						'noruta'	=>$this->numberTo3String($i+1)
 					));
+
+					if($existing_ruta==null){
+						$existing_ruta = new MRuta;
+
+						$existing_ruta->idProv = $model_bs->idProv;
+						$existing_ruta->idKab	= $model_bs->idKab;
+						$existing_ruta->nobatch = $nextBatch['label'];
+						$existing_ruta->noruta = $this->numberTo3String($i+1);
+
+						$existing_ruta->status = '1';
+						$existing_ruta->ket_status = '';
+					}
+
 					if($_POST['nama'.$i]=='')
 						$existing_ruta->namakrt = 'NN';
 					else

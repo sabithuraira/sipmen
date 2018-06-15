@@ -69,6 +69,11 @@
             <div class="box-header with-border">
               <h3 class="box-title">Daftar Rumah Tangga Diterima</h3>
               <!-- /.box-tools -->
+              <?php 
+                if(!$is_batch_baru){
+                    echo '<div class="pull-right"><button type="button" id="btn_tambah" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Tambah Ruta</button></div>';
+                }
+              ?>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -106,6 +111,11 @@
                                 echo '</tr>'; 
                             }
                         }
+                        ?>
+                        <tr v-for="(row, index) in tambahan_ruta">
+                            <td><input type="text" :id="'nama'+(index+asal_ruta)" :name="'nama'+(index+asal_ruta)" class="form-control" placeholder="masukkan nama ruta"></input></td>
+                        </tr>
+                    <?php
                     } 
                     ?>
                   
