@@ -169,6 +169,12 @@
                         'type'=>'raw',
                         'value'		=> function($data){ return $data->statusKirimLabel."<br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/kirim', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
+                      
+                      array(
+                        'header' =>'PENERIMAAN PROVINSI',
+                        'type'=>'raw',
+                        'value'		=> function($data){ return $data->statusTerimaProvLabel."<br/>Jumlah: ".$data->jml_terima_prov."<br/> Tanggal: ".$data->tgl_terima_prov."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/terimaprov', 'id'=>$data->nks_sutas)).'</div>'; },
+                      ),
                       array(
                         'header' =>'BATCH',
                         'type'=>'raw',

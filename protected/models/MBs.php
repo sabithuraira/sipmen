@@ -189,6 +189,13 @@ class MBs extends CActiveRecord
 			return '<div class="label bg-green">SUDAH EDIT</div>';
 	}
 
+	public function getStatusTerimaProvLabel(){
+		if($this->status_terima_prov==0)
+			return '<div class="label bg-red">BELUM TERIMA PROV</div>';
+		else 
+			return '<div class="label bg-green">SUDAH TERIMA PROV</div>';
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

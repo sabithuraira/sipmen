@@ -265,6 +265,58 @@ class SiteController extends Controller
 		));
 	}
 
+
+	public function actionTerimaprov($id){
+		$model_bs = $this->loadBS($id);
+		$nextBatch = array(
+			'nomor'	=>$model_bs->nomorbatch,
+			'label'	=>$model_bs->nobatch
+		);
+
+		if(isset($_POST['jumlah_ruta'])){
+			$total = 0;
+
+			$all_ruta_edit = MRuta::model()->findAllByAttributes(
+				array(
+					'nobatch'	=>$nextBatch['label'],
+				),
+				array(
+					'condition' =>'status >=3',
+				)
+			);
+			
+			foreach($all_ruta_edit as $key=>$value){
+				if(isset($_POST['prov'.$value['noruta']])){
+					$value->status = '4';
+					$value->save();
+					$total+=1;
+				}
+			}
+
+			if($total>0){
+				$model_bs->status_terima_prov ='1';
+				$model_bs->jml_terima_prov =$total;
+				$model_bs->tgl_terima_prov = date('Y-m-d');
+				$model_bs->save(false);
+
+				$batch = MBatch::model()->findByAttributes(array(
+					'nobatch'	=>$model_bs->nobatch
+				));
+				if($batch!=null){
+					$batch->status = '4';
+					$batch->save(false);
+				}
+			}
+
+			$this->redirect(array('site/index'));
+		}
+
+		$this->render('terimaprov', array(
+			'model_bs'	=>$model_bs,
+			'nextBatch'	=>$nextBatch,
+		));
+	}
+
 	public function actionGet_list_kec($id)
 	{
 		$satu='';
