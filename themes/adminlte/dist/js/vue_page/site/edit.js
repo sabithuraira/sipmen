@@ -11,6 +11,17 @@ $(document).ready(function() {
 });
 
 
+  $(".btn_drop").click(function () {
+    var init_number = $(this).data('nid');
+
+
+    $("#edit"+init_number).attr('disabled', true);
+    $("#drop"+init_number).removeAttr('checked');
+    $("#drop"+init_number).attr('disabled', false);
+    $(this).removeClass("btn-default").addClass('btn-info');
+  });
+
+
   //Enable check and uncheck all functionality
   $(".checkbox-toggle").click(function () {
     var clicks = $(this).data('clicks');

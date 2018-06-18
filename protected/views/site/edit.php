@@ -102,11 +102,13 @@
                                 $is_checked='checked';
 
                           echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox" '.$is_checked.'></td><td>'.$existing_ruta->namakrt.'</td>';
-                          echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                          echo '<td><button type="button" data-nid="'.$i.'" class="btn btn-default btn-sm btn_drop"><i class="fa fa-trash-o"></i> drop</button></td>';
+                          echo '<td><input type="text" id="drop'.$i.'" name="drop'.$i.'" class="form-control" placeholder="keterangan" disabled></input></td>';
                           echo '</tr>';
                       }else{
                           echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox"></td><td></td>';
-                          echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                          echo '<td><button type="button" data-nid="'.$i.'" class="btn btn-default btn-sm btn_drop"><i class="fa fa-trash-o"></i> drop</button></td>';
+                          echo '<td><input type="text" id="drop'.$i.'" name="drop'.$i.'" class="form-control" placeholder="keterangan" disabled></input></td>';
                           echo '</tr>'; 
                       }
                   }

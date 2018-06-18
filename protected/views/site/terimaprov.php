@@ -97,7 +97,6 @@
                             $is_checked='checked';
 
                         echo '<tr><td><input id="prov'.$value['noruta'].'" name="prov'.$value['noruta'].'" type="checkbox" '.$is_checked.'></td><td>'.$value->namakrt.'</td>';
-                        echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
                         echo '</tr>';
                     }
               ?>
