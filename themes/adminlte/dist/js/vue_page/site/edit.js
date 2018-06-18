@@ -14,11 +14,23 @@ $(document).ready(function() {
   $(".btn_drop").click(function () {
     var init_number = $(this).data('nid');
 
+    var is_drop = $("#is_drop"+init_number).val();
 
-    $("#edit"+init_number).attr('disabled', true);
-    $("#drop"+init_number).removeAttr('checked');
-    $("#drop"+init_number).attr('disabled', false);
-    $(this).removeClass("btn-default").addClass('btn-info');
+    if(is_drop==0){
+      $("#edit"+init_number).iCheck("uncheck");
+      $("#edit"+init_number).attr('disabled', true);
+      $("#drop"+init_number).attr('disabled', false);
+      $(this).removeClass("btn-default").addClass('btn-info');
+
+      $("#is_drop"+init_number).val(1);
+    }
+    else{
+      $("#edit"+init_number).attr('disabled', false);
+      $("#drop"+init_number).attr('disabled', true);
+      $(this).removeClass("btn-info").addClass('btn-default');
+
+      $("#is_drop"+init_number).val(0);
+    }
   });
 
 

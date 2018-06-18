@@ -171,6 +171,7 @@ class SiteController extends Controller
 
 		if(isset($_POST['jumlah_ruta'])){
 			$total = 0;
+			$total_drop = 0;
 			for($i=0;$i<$model_bs->jml_terima;++$i){
 
 				if(isset($_POST['edit'.$i])){
@@ -184,12 +185,26 @@ class SiteController extends Controller
 					$total+=1;
 					//
 				}
+
+				if($_POST['is_drop'.$i] == 1){
+					///
+					$existing_ruta = MRuta::model()->findByAttributes(array(
+						'nobatch'	=>$nextBatch['label'],
+						'noruta'	=>$this->numberTo3String($i+1)
+					));
+					$existing_ruta->status = '9';
+					$existing_ruta->ket_status = $_POST['drop'.$i];
+					$existing_ruta->save();
+					$total_drop+=1;
+					//
+				}
+				
 			}
 
 			if($total>0){
 				$model_bs->status_edit ='1';
 				$model_bs->jml_edit =$total;
-				// $model_bs->jml_drop = 0;
+				$model_bs->jml_drop = $total_drop;
 				$model_bs->tgl_edit = date('Y-m-d');
 				$model_bs->save(false);
 

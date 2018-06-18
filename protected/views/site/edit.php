@@ -103,11 +103,13 @@
 
                           echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox" '.$is_checked.'></td><td>'.$existing_ruta->namakrt.'</td>';
                           echo '<td><button type="button" data-nid="'.$i.'" class="btn btn-default btn-sm btn_drop"><i class="fa fa-trash-o"></i> drop</button></td>';
+                          echo '<input type="hidden" value="0" id="is_drop'.$i.'" name="is_drop'.$i.'"></input>';
                           echo '<td><input type="text" id="drop'.$i.'" name="drop'.$i.'" class="form-control" placeholder="keterangan" disabled></input></td>';
                           echo '</tr>';
                       }else{
                           echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox"></td><td></td>';
                           echo '<td><button type="button" data-nid="'.$i.'" class="btn btn-default btn-sm btn_drop"><i class="fa fa-trash-o"></i> drop</button></td>';
+                          echo '<input type="hidden" value="0" id="is_drop'.$i.'" name="is_drop'.$i.'"></input>';
                           echo '<td><input type="text" id="drop'.$i.'" name="drop'.$i.'" class="form-control" placeholder="keterangan" disabled></input></td>';
                           echo '</tr>'; 
                       }
