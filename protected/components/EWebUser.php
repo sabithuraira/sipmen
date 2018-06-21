@@ -24,7 +24,7 @@ class EWebUser extends CWebUser{
     {
         $user=$this->loadUser();
         if($user)
-            return $user->unit_kerja;
+            return substr($user->unit_kerja, 2, 2);
         return 100;
     }
 

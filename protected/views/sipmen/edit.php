@@ -41,10 +41,32 @@
   )); ?>
   <div class="col-md-9">
     <?php 
+        $is_kabupaten_allow = false;
+        if(Yii::app()->user->unitKerja == '00'){
+            $is_kabupaten_allow = true;
+        }
+        else{
+            if(Yii::app()->user->unitKerja != $model_bs->idKab){
+                if($model_bs->idKab == '13' && Yii::app()->user->unitKerja=='05')
+                    $is_kabupaten_allow = true;
+
+                if($model_bs->idKab == '12' && Yii::app()->user->unitKerja=='03')
+                    $is_kabupaten_allow = true;
+            }
+            else{
+                $is_kabupaten_allow = true;
+            }
+        }
+
         if($nextBatch['label']==''){
             echo '<div class="alert alert-danger alert-dismissible">
               <h4><i class="icon fa fa-ban"></i> Error!</h4>
               NKS Ini belum melewati proses penerimaan di TU (Tata Usaha)</div>';
+        }
+        else if(!$is_kabupaten_allow){
+            echo '<div class="alert alert-danger alert-dismissible">
+            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            Anda tidak berhak memasukkan data kabupaten ini</div>';
         }
         else{
     ?>

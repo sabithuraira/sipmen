@@ -37,11 +37,39 @@
           </div>
         </div>
         <!-- /.col -->
+
         
         <?php $form=$this->beginWidget('CActiveForm', array(
             'enableAjaxValidation'=>false,
         )); ?>
         <div class="col-md-9">
+            
+            <?php 
+                $is_kabupaten_allow = false;
+                if(Yii::app()->user->unitKerja == '00'){
+                    $is_kabupaten_allow = true;
+                }
+                else{
+                    if(Yii::app()->user->unitKerja != $model_bs->idKab){
+                        if($model_bs->idKab == '13' && Yii::app()->user->unitKerja=='05')
+                            $is_kabupaten_allow = true;
+
+                        if($model_bs->idKab == '12' && Yii::app()->user->unitKerja=='03')
+                            $is_kabupaten_allow = true;
+                    }
+                    else{
+                        $is_kabupaten_allow = true;
+                    }
+                }
+
+                if(!$is_kabupaten_allow){
+                    echo '<div class="alert alert-danger alert-dismissible">
+                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                    Anda tidak berhak memasukkan data kabupaten ini</div>';
+                }
+                else{
+            ?>
+
             <div class="box box-success">
                 <div class="box-body">
                     <div class="form-group">
@@ -115,9 +143,7 @@
                         <tr v-for="(row, index) in tambahan_ruta">
                             <td><input type="text" :id="'nama'+(index+asal_ruta)" :name="'nama'+(index+asal_ruta)" class="form-control" placeholder="masukkan nama ruta"></input></td>
                         </tr>
-                    <?php
-                    } 
-                    ?>
+                    <?php } ?>
                   
                   </tbody>
                 </table>
@@ -133,8 +159,8 @@
             <?php echo CHtml::submitButton('Simpan', array('class'=>"btn btn-success btn-block margin-bottom")); ?>
         </div>
         
+        <?php } ?>
         <?php $this->endWidget(); ?>
-        <!-- /.col -->
       </div>
 
 </div>

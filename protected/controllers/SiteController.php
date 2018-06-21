@@ -162,13 +162,4 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
-
-
-	public function loadBS($id)
-	{
-		$model=MBs::model()->findByAttributes(array('nks_sutas'=>$id));
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
 }

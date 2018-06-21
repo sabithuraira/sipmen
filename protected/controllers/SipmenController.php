@@ -46,8 +46,8 @@ class SipmenController extends Controller
     }
     
 
-	public function actionTerima($id){
-		$model_bs = $this->loadBS($id);
+	public function actionTerima($id, $kab){
+		$model_bs = $this->loadBS($id, $kab);
 		$is_batch_baru = true;
 
 		if($model_bs->nomorbatch!=0)
@@ -166,8 +166,8 @@ class SipmenController extends Controller
 		return $label;
 	}
 
-	public function actionEdit($id){
-		$model_bs = $this->loadBS($id);
+	public function actionEdit($id, $kab){
+		$model_bs = $this->loadBS($id, $kab);
 		$nextBatch = array(
 			'nomor'	=>$model_bs->nomorbatch,
 			'label'	=>$model_bs->nobatch
@@ -230,8 +230,8 @@ class SipmenController extends Controller
 		));
 	}
 
-	public function actionKirim($id){
-		$model_bs = $this->loadBS($id);
+	public function actionKirim($id, $kab){
+		$model_bs = $this->loadBS($id, $kab);
 		$nextBatch = array(
 			'nomor'	=>$model_bs->nomorbatch,
 			'label'	=>$model_bs->nobatch
@@ -285,8 +285,8 @@ class SipmenController extends Controller
 	}
 
 
-	public function actionTerimaprov($id){
-		$model_bs = $this->loadBS($id);
+	public function actionTerimaprov($id, $kab){
+		$model_bs = $this->loadBS($id, $kab);
 		$nextBatch = array(
 			'nomor'	=>$model_bs->nomorbatch,
 			'label'	=>$model_bs->nobatch
@@ -338,9 +338,9 @@ class SipmenController extends Controller
     
 
 
-	public function loadBS($id)
+	public function loadBS($id, $kab)
 	{
-		$model=MBs::model()->findByAttributes(array('nks_sutas'=>$id));
+		$model=MBs::model()->findByAttributes(array('nks_sutas'=>$id, 'idKab'=> $kab));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
