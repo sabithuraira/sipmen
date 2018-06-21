@@ -58,8 +58,8 @@
 
               <div class="form-group">
                   <?php echo "Jumlah Ruta"; ?>
-                    <input type="number" value="<?php echo $model_bs->jml_terima; ?>" class="form-control" disabled></input>
-                    <input type="hidden" name="jumlah_ruta" value=<?php echo $model_bs->jml_terima; ?>></input>
+                    <input type="number" value="<?php echo $model_bs->jml_kirim; ?>" class="form-control" disabled></input>
+                    <input type="hidden" name="jumlah_ruta" value=<?php echo $model_bs->jml_kirim; ?>></input>
               </div>
           </div>
       </div>
@@ -87,7 +87,7 @@
                             'nobatch'	=>$nextBatch['label'],
                         ),
                         array(
-                            'condition' =>'status >=3',
+                            'condition' =>'status >=3 && status!=9',
                         )
                     );
                     

@@ -157,23 +157,23 @@
                       array(
                         'header' =>'STATUS TERIMA',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusTerimaLabel."<br/>Jumlah: ".$data->jml_terima."<br/> Tanggal: ".$data->tgl_terima."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/terima', 'id'=>$data->nks_sutas)).'</div>'; },
+                        'value'		=> function($data){ return $data->statusTerimaLabel."<br/>Jumlah: ".$data->jml_terima."<br/> Tanggal: ".$data->tgl_terima."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('sipmen/terima', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       array(
                         'header' =>'STATUS EDIT',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusEditLabel."<br/>Jumlah: ".$data->jml_edit."<br/>Jumlah Drop: ".$data->jml_drop."<br/> Tanggal: ".$data->tgl_edit."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/edit', 'id'=>$data->nks_sutas)).'</div>'; },
+                        'value'		=> function($data){ return $data->statusEditLabel."<br/>Jumlah: ".$data->jml_edit."<br/>Jumlah Drop: ".$data->jml_drop."<br/> Tanggal: ".$data->tgl_edit."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('sipmen/edit', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       array(
                         'header' =>'STATUS KIRIM',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusKirimLabel."<br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/kirim', 'id'=>$data->nks_sutas)).'</div>'; },
+                        'value'		=> function($data){ return $data->statusKirimLabel."<br/>Nomor: ".$data->nmr_kirim."<br/>Jumlah: ".$data->jml_kirim."<br/> Tanggal: ".$data->tgl_kirim."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('sipmen/kirim', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       
                       array(
                         'header' =>'PENERIMAAN PROVINSI',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusTerimaProvLabel."<br/>Jumlah: ".$data->jml_terima_prov."<br/> Tanggal: ".$data->tgl_terima_prov."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('site/terimaprov', 'id'=>$data->nks_sutas)).'</div>'; },
+                        'value'		=> function($data){ return $data->statusTerimaProvLabel."<br/>Jumlah: ".$data->jml_terima_prov."<br/> Tanggal: ".$data->tgl_terima_prov."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('sipmen/terimaprov', 'id'=>$data->nks_sutas)).'</div>'; },
                       ),
                       array(
                         'header' =>'BATCH',

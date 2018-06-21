@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SIM RAPOR</title>
+  <title>SIPMEN SUTAS</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
 	  // $cs = Yii::app()->getClientScript();
@@ -40,8 +40,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>SIM</b> 
-    RAPOR
+    <b>SIPMEN</b> 
+    SUTAS
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
