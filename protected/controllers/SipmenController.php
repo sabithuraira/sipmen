@@ -62,7 +62,7 @@ class SipmenController extends Controller
 			);
 		}
 
-		if(isset($_POST['jumlah_ruta'])){
+		if(isset($_POST['jumlah_ruta']) && $_POST['jumlah_ruta']>0){
 
 			if($is_batch_baru){
 				$model = new MBatch;

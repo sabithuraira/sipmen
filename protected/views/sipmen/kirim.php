@@ -118,7 +118,7 @@
                         if($value->status==3 OR $value->status==4)
                             $is_checked='checked';
 
-                        echo '<tr><td><input id="kirim'.$value['noruta'].'" name="kirim'.$value['noruta'].'" type="checkbox" '.$is_checked.'></td><td>'.$value->namakrt.'</td>';
+                        echo '<tr><td><input id="kirim'.$value['noruta'].'" name="kirim'.$value['noruta'].'" type="checkbox" '.$is_checked.'></td><td>('.$value->noruta.') '.$value->namakrt.'</td>';
                         echo '</tr>';
                     }
               ?>

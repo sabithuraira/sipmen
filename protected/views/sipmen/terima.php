@@ -40,6 +40,7 @@
 
         
         <?php $form=$this->beginWidget('CActiveForm', array(
+            'id'=>'terima-form',
             'enableAjaxValidation'=>false,
         )); ?>
         <div class="col-md-9">
@@ -112,7 +113,8 @@
 
                     <?php if($is_batch_baru){ ?>
                         <tr v-for="(row, index) in jumlah_ruta">
-                            <td><input type="text" :id="'nama'+index" :name="'nama'+index" class="form-control" placeholder="masukkan nama ruta"></input></td>
+                            <td><input type="number" :id="'noruta'+index" :name="'noruta'+index" class="form-control" placeholder="nomor ruta tani"></input></td>
+                            <td><input type="text" :id="'nama'+index" :name="'nama'+index" class="form-control" placeholder="nama kepala ruta"></input></td>
                         </tr>
                     <?php } else{
                         for($i=0;$i<$model_bs->jml_terima;++$i){
@@ -130,18 +132,21 @@
                             ));
 
                             if($existing_ruta!=null){
-                                echo '<tr><td><input type="text" value="'.$existing_ruta->namakrt.'" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="masukkan nama ruta"></input></td>';
+                                echo '<tr><td><input type="number" value="'.$existing_ruta->noruta.'" id="noruta'.$i.'" name="noruta'.$i.'" class="form-control" placeholder="nomor ruta tani"></input></td>';
+                                echo '<td><input type="text" value="'.$existing_ruta->namakrt.'" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="nama kepala ruta"></input></td>';
                                 echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
                                 echo '</tr>';
                             }else{
-                                echo '<tr><td><input type="text" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="masukkan nama ruta"></input></td>';
+                                echo '<tr><td><input type="number" id="noruta'.$i.'" name="noruta'.$i.'" class="form-control" placeholder="nomor ruta tani"></input></td>';
+                                echo '<td><input type="text" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="nama kepala ruta"></input></td>';
                                 echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
                                 echo '</tr>'; 
                             }
                         }
                         ?>
                         <tr v-for="(row, index) in tambahan_ruta">
-                            <td><input type="text" :id="'nama'+(index+asal_ruta)" :name="'nama'+(index+asal_ruta)" class="form-control" placeholder="masukkan nama ruta"></input></td>
+                            <td><input type="number" :id="'noruta'+(index+asal_ruta)" :name="'noruta'+(index+asal_ruta)" class="form-control" placeholder="nomor ruta tani"></input></td>
+                            <td><input type="text" :id="'nama'+(index+asal_ruta)" :name="'nama'+(index+asal_ruta)" class="form-control" placeholder="nama kepala ruta"></input></td>
                         </tr>
                     <?php } ?>
                   
@@ -155,6 +160,9 @@
 
 
           </div>
+
+
+        <div class="alert alert-danger alert-dismissible" v-if="is_error">No urut ruta pertanian masih salah</div>
           <!-- /. box -->
             <?php echo CHtml::submitButton('Simpan', array('class'=>"btn btn-success btn-block margin-bottom")); ?>
         </div>

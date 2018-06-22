@@ -120,13 +120,27 @@
 
                       if($existing_ruta!=null){
                           $is_checked = '';
-                            if($existing_ruta->status>=2 && $existing_ruta->status<=4)
+                          $is_checked_disable = '';
+                          $is_disable = 'disabled';
+                          $btn_class = 'btn-default';
+                          $is_drop_val = 0;
+                            if($existing_ruta->status>=2 && $existing_ruta->status<=4){
                                 $is_checked='checked';
+                            }
+                            else{
+                                $is_disable = '';
+                            }
 
-                          echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox" '.$is_checked.'></td><td>'.$existing_ruta->namakrt.'</td>';
-                          echo '<td><button type="button" data-nid="'.$i.'" class="btn btn-default btn-sm btn_drop"><i class="fa fa-trash-o"></i> drop</button></td>';
-                          echo '<input type="hidden" value="0" id="is_drop'.$i.'" name="is_drop'.$i.'"></input>';
-                          echo '<td><input type="text" id="drop'.$i.'" name="drop'.$i.'" class="form-control" placeholder="keterangan" disabled></input></td>';
+                            if($existing_ruta->status == 9){
+                                $btn_class = 'btn-info';
+                                $is_checked_disable = 'disabled';
+                                $is_drop_val = 1;
+                            }
+
+                          echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox" '.$is_checked.' '.$is_checked_disable.'></td><td>('.$existing_ruta->noruta.') '.$existing_ruta->namakrt.'</td>';
+                          echo '<td><button type="button" data-nid="'.$i.'" class="btn '.$btn_class.' btn-sm btn_drop"><i class="fa fa-trash-o"></i> drop</button></td>';
+                          echo '<input type="hidden" value="'.$is_drop_val.'" id="is_drop'.$i.'" name="is_drop'.$i.'"></input>';
+                          echo '<td><input type="text" id="drop'.$i.'" name="drop'.$i.'" class="form-control" value="'.$existing_ruta->ket_status.'" placeholder="keterangan" '.$is_disable.'></input></td>';
                           echo '</tr>';
                       }else{
                           echo '<tr><td><input id="edit'.$i.'" name="edit'.$i.'" type="checkbox"></td><td></td>';
