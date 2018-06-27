@@ -81,12 +81,21 @@
                     <div class="form-group">
                         <?php echo "Jumlah Ruta"; ?>
                         <?php if($is_batch_baru){ ?>
-                            <input type="number" name="jumlah_ruta" v-model.number="jumlah_ruta" class="form-control"></input>
+                            <input type="number" id="jumlah_ruta" class="form-control"></input>
+                            <input type="hidden" name="jumlah_ruta" v-model.number="jumlah_ruta"></input>
                             <input type="hidden" id="hid_jumlah_ruta" value="0"></input>
+
+                            <div class="text-center">
+                                <br/><button id="btn-generate" type="button" class="btn btn-success btn-sm"><i class="fa fa-fighter-jet"></i> Masukkan RUTA</button>
+                            </div>
                         <?php } else{ ?>
                             <input type="number" value="<?php echo $model_bs->jml_terima; ?>" class="form-control" disabled></input>
                             <input type="hidden" name="jumlah_ruta" v-model.number="jumlah_ruta"></input>
                             <input type="hidden" id="hid_jumlah_ruta" value="<?php echo $model_bs->jml_terima; ?>"></input>
+
+                            <div class="text-center">
+                                <br/><button id="btn-generate" type="button" class="btn btn-success btn-sm" disabled><i class="fa fa-fighter-jet"></i> Masukkan RUTA</button>
+                            </div>
                         <?php } ?>
 
 

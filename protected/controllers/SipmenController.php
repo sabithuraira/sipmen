@@ -84,7 +84,7 @@ class SipmenController extends Controller
 						$model_ruta->idProv = $model->idProv;
 						$model_ruta->idKab	= $model->idKab;
 						$model_ruta->nobatch = $model->nobatch;
-						$model_ruta->noruta = $this->numberTo3String($i+1);
+						$model_ruta->noruta = $this->numberTo3String($_POST['noruta'.$i]);
 						if($_POST['nama'.$i]=='')
 							$model_ruta->namakrt = 'NN';
 						else
@@ -129,7 +129,7 @@ class SipmenController extends Controller
 						$existing_ruta->idProv = $model_bs->idProv;
 						$existing_ruta->idKab	= $model_bs->idKab;
 						$existing_ruta->nobatch = $nextBatch['label'];
-						$existing_ruta->noruta = $this->numberTo3String($i+1);
+						$existing_ruta->noruta = $this->numberTo3String($_POST['noruta'.$i]);
 
 						$existing_ruta->status = '1';
 						$existing_ruta->ket_status = '';

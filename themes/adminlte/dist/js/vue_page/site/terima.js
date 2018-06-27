@@ -20,6 +20,14 @@ $(document).ready(function() {
     }
 });
 
+
+$("#btn-generate").click(function(e){
+    vm.jumlah_ruta = parseInt($("#jumlah_ruta").val());
+    $("#btn-generate").attr('disabled', true);
+    $("#jumlah_ruta").attr('disabled', true);
+});
+
+
 $("#terima-form").submit(function(e){
     var semua_nomor = [];
     for(i=0;i<vm.jumlah_ruta;++i){
