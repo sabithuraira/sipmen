@@ -316,6 +316,7 @@ class SipmenController extends Controller
 				$model_bs->status_terima_prov ='1';
 				$model_bs->jml_terima_prov =$total;
 				$model_bs->tgl_terima_prov = date('Y-m-d');
+				$model_bs->terima_by = Yii::app()->user->id;
 				$model_bs->save(false);
 
 				$batch = MBatch::model()->findByAttributes(array(

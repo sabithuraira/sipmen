@@ -1,0 +1,1 @@
+ALTER TABLE `m_bs` ADD `terima_by` INT NOT NULL AFTER `tgl_terima_prov`;
