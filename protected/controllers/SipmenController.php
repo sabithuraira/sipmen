@@ -28,7 +28,7 @@ class SipmenController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('terima','edit', 'kirim'),
+				'actions'=>array('terima','edit', 'kirim', 'import', 'selecttab'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -43,6 +43,69 @@ class SipmenController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+	
+	public function actionImport($id, $kab)
+	{
+		$model_bs = $this->loadBS($id, $kab);
+
+		$is_batch_baru = true;
+		
+		if($model_bs->nomorbatch!=0)
+			$is_batch_baru=false;
+
+		$model=new FileForm;
+
+		if(isset($_POST['FileForm']))
+		{
+			$model->attributes=$_POST['FileForm'];
+			
+			if($_FILES)
+			{
+				$cUploadedFile=CUploadedFile::getInstance($model,'filename');
+				if($cUploadedFile)
+				{
+					$naname=sha1(uniqid(mt_rand(), true));
+					$fileName=$naname.'.'.$cUploadedFile->extensionName;
+					if($cUploadedFile->saveAs(Yii::app()->basePath.'/../upload/temp/' . $fileName))
+					{
+						$this->redirect(array('selecttab','name'=>$naname,'id'=>$id, 'kab'=>$kab));	
+					}
+				}
+			}
+			
+		}
+
+		$this->render('import',array(
+			'model'=>$model,
+			'id'=>$id,
+			'model_bs'	=>$model_bs,
+			'is_batch_baru'	=>$is_batch_baru
+		));
+	}
+
+	public function actionSelecttab($name,$id, $kab)
+    {
+		$model_bs = $this->loadBS($id, $kab);
+
+		$is_batch_baru = true;
+		
+		if($model_bs->nomorbatch!=0)
+			$is_batch_baru=false;
+
+        $model=new FileForm;
+        if(isset($_POST['listname']))
+        {
+            $model->importSutas($name,$_POST['listname'],$id, $kab);
+            	// $model->importPaguSatker($name,$_POST['listname']);
+        }
+
+        $this->render('select',array(
+            'naname'=>$name,
+			'model' =>$model,
+			'model_bs'	=>$model_bs,
+			'is_batch_baru'	=>$is_batch_baru
+        ));
     }
     
 

@@ -196,6 +196,18 @@ class MBs extends CActiveRecord
 			return '<div class="label bg-green">SUDAH TERIMA PROV</div>';
 	}
 
+	public function getRekapDokumen(){
+		$sql = 'SELECT idKab, 
+				sum(case status_terima when 1 then 1 else 0 end) as terima,
+				sum(case status_edit when 1 then 1 else 0 end) as editing,
+				sum(case status_kirim when 1 then 1 else 0 end) as kirim,
+				sum(case status_terima_prov when 1 then 1 else 0 end) as terima_prov
+			FROM `m_bs` WHERE 1 
+			GROUP BY idKab';
+
+		return Yii::app()->db->createCommand($sql)->queryAll();
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

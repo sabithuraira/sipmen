@@ -87,6 +87,7 @@
 
                             <div class="text-center">
                                 <br/><button id="btn-generate" type="button" class="btn btn-success btn-sm"><i class="fa fa-fighter-jet"></i> Masukkan RUTA</button>
+                                <a href="<?php echo Yii::app()->createUrl('sipmen/import', array('id'=>$model_bs->nks_sutas, 'kab'=>$model_bs->idKab)); ?>" class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i> Import From Excel</a>
                             </div>
                         <?php } else{ ?>
                             <input type="number" value="<?php echo $model_bs->jml_terima; ?>" class="form-control" disabled></input>
