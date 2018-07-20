@@ -28,7 +28,7 @@ class ReportController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','edit', 'kirim', 'terima_prov'),
+				'actions'=>array('index','user'),
 				'expression'=> function($user){
 					return $user->getLevel()<=3;
 				},
@@ -43,6 +43,36 @@ class ReportController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+	
+	public function actionUser()
+	{
+		$data = MBs::model()->getRekapOp();
+
+		$model=new MBs('search');
+		$model->unsetAttributes();  // clear any default values
+
+		$model->idProv = '16';
+		if(isset($_POST['kab_id']))
+		{
+			$model->idKab=$_POST['kab_id'];
+			$data = MBs::model()->getRekapOp($model->idKab);
+
+			if(isset($_POST['kec_id'])){
+				$model->idKec=$_POST['kec_id'];
+				$data = MBs::model()->getRekapOp($model->idKab, $model->idKec);
+
+				if(isset($_POST['desa_id'])){
+					$model->idDesa=$_POST['desa_id'];
+					$data = MBs::model()->getRekapOp($model->idKab, $model->idKec, $model->idDesa);
+				}
+			}
+		}
+
+		$this->render('user', array(
+			'data'	=>$data,
+			'model'=>$model,
+		));
     }
 
 	public function actionIndex()

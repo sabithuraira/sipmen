@@ -247,6 +247,32 @@ class MBs extends CActiveRecord
 		return Yii::app()->db->createCommand($sql)->queryAll();
 	}
 
+	public function getRekapOp($id_kab=null, $id_kec=null, $id_desa= null){
+		$select = 'sum(case status_terima_prov when 1 then 1 else 0 end) as total';
+
+		$where = "bs.terima_by = u.id ";
+
+
+		if($id_kab!=null && $id_kab!=0){
+			$where .= " AND bs.idKab = ".$id_kab;
+
+			if($id_kec!=null && $id_kec!=0){
+				$where .= "AND bs.idKec = ".$id_kec;
+
+				if($id_desa!=null && $id_desa!=0){
+					$where .= "AND bs.idDesa = ".$id_desa;
+				}
+			}
+		}
+
+		$sql = "SELECT u.id, u.username as nama, $select
+				FROM `m_bs` bs, mem_user u WHERE 
+				$where
+				GROUP BY u.id";
+
+		return Yii::app()->db->createCommand($sql)->queryAll();
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
