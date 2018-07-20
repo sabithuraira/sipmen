@@ -45,11 +45,33 @@ class ReportController extends Controller
 		);
     }
 
-    public function actionIndex(){
+	public function actionIndex()
+	{
+		$data = MBs::model()->getRekap();
+
+		$model=new MBs('search');
+		$model->unsetAttributes();  // clear any default values
+
+		$model->idProv = '16';
+		if(isset($_POST['kab_id']))
+		{
+			$model->idKab=$_POST['kab_id'];
+			$data = MBs::model()->getRekap($model->idKab);
+
+			if(isset($_POST['kec_id'])){
+				$model->idKec=$_POST['kec_id'];
+				$data = MBs::model()->getRekap($model->idKab, $model->idKec);
+
+				if(isset($_POST['desa_id'])){
+					$model->idDesa=$_POST['desa_id'];
+					$data = MBs::model()->getRekap($model->idKab, $model->idKec, $model->idDesa);
+				}
+			}
+		}
 
 		$this->render('index', array(
-			'model_bs'	=>$model_bs,
-			'nextBatch'	=>$nextBatch,
+			'data'	=>$data,
+			'model'=>$model,
 		));
     }
 }

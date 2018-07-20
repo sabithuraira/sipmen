@@ -196,14 +196,53 @@ class MBs extends CActiveRecord
 			return '<div class="label bg-green">SUDAH TERIMA PROV</div>';
 	}
 
-	public function getRekapDokumen(){
-		$sql = 'SELECT idKab, 
+	public function getRekap($id_kab=null, $id_kec=null, $id_desa= null){
+		$select = '
+				sum(1) as total_bs,
 				sum(case status_terima when 1 then 1 else 0 end) as terima,
 				sum(case status_edit when 1 then 1 else 0 end) as editing,
 				sum(case status_kirim when 1 then 1 else 0 end) as kirim,
-				sum(case status_terima_prov when 1 then 1 else 0 end) as terima_prov
-			FROM `m_bs` WHERE 1 
-			GROUP BY idKab';
+				sum(case status_terima_prov when 1 then 1 else 0 end) as terima_prov';
+
+		$sql = "SELECT k.idKab as kode, k.nmKab as nama, $select
+			FROM `m_bs` bs, m_kab k WHERE 
+            bs.idKab = k.idKab
+			GROUP BY bs.idKab";
+
+		if($id_kab!=null && $id_kab!=0){
+			$sql = "SELECT kec.idKec as kode,  kec.nmKec as nama, $select
+				FROM `m_bs` bs, m_kab k, m_kec kec WHERE 
+				bs.idKab = ".$id_kab." AND 
+				kec.idKab = ".$id_kab." AND 
+                bs.idKab = k.idKab AND 
+				bs.idKec = kec.idKec 
+				GROUP BY bs.idKec";
+
+			if($id_kec!=null && $id_kec!=0){
+				$sql = "SELECT desa.idDesa as kode,  desa.nmDesa as nama, $select
+					FROM `m_bs` bs, m_kab k, m_kec kec, m_desa desa WHERE 
+					bs.idKab = ".$id_kab." AND
+					bs.idKec = ".$id_kec." AND 
+
+					kec.idKab = ".$id_kab." AND 
+					desa.idKab = ".$id_kab." AND 
+					desa.idKec = ".$id_kec." AND 
+
+					bs.idKab = k.idKab AND 
+					bs.idKec = kec.idKec AND 
+					bs.idDesa = desa.idDesa 
+					GROUP BY bs.idDesa";
+			}
+
+
+			if($id_desa!=null && $id_desa!=0){
+				$sql = "SELECT nbs as kode,  nks_sutas as nama, $select
+					FROM `m_bs` WHERE 
+					idKab = ".$id_kab." AND
+					idKec = ".$id_kec." AND 
+					idDesa = ".$id_desa." ";
+			}
+		}
 
 		return Yii::app()->db->createCommand($sql)->queryAll();
 	}
