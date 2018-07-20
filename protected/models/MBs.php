@@ -248,7 +248,8 @@ class MBs extends CActiveRecord
 	}
 
 	public function getRekapOp($id_kab=null, $id_kec=null, $id_desa= null){
-		$select = 'sum(case status_terima_prov when 1 then 1 else 0 end) as total';
+		$select = 'sum(case status_terima_prov when 1 then 1 else 0 end) as total, 
+					sum(case status_terima_prov when 1 then jml_terima_prov else 0 end) as total_ruta';
 
 		$where = "bs.terima_by = u.id ";
 

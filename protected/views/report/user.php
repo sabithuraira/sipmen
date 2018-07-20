@@ -91,6 +91,7 @@
                         <tr>
                             <th>Nama</th>
                             <th>Total BS</th>
+                            <th>Total RUTA</th>
                         </tr>
 
                         <?php
@@ -98,6 +99,7 @@
                                 echo '<tr>';
                                     echo '<td>'.$value['nama'].'</td>';
                                     echo '<td>'.$value['total'].'</td>';
+                                    echo '<td>'.$value['total_ruta'].'</td>';
                                 echo '</tr>';
                             }
                         ?>
