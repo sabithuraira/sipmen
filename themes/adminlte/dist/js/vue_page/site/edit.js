@@ -13,7 +13,6 @@ $(document).ready(function() {
 
   $(".btn_drop").click(function () {
     var init_number = $(this).data('nid');
-
     var is_drop = $("#is_drop"+init_number).val();
 
     if(is_drop==0){

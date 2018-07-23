@@ -28,7 +28,7 @@ class ReportController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','user'),
+				'actions'=>array('index','user', 'cetak', 'get_list_cetak'),
 				'expression'=> function($user){
 					return $user->getLevel()<=3;
 				},
@@ -43,6 +43,50 @@ class ReportController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionGet_list_cetak()
+	{
+		$model = new Mbs;
+
+		if(isset($_POST['kab_id']))
+			$model->idKab=$_POST['kab_id'];
+
+		if(isset($_POST['kec_id']))
+			$model->idKec=$_POST['kec_id'];
+
+		if(isset($_POST['desa_id']))
+			$model->idDesa=$_POST['desa_id'];
+
+		$data = $model->getCetak();
+
+		echo CJSON::encode(array
+		(
+			'hasil'=>$data,
+		));
+		Yii::app()->end();
+	}
+
+	public function actionCetak(){
+		$model=new MBs('search');
+		$model->unsetAttributes();  // clear any default values
+
+		$model->idProv = '16';
+		if(isset($_POST['kab_id']))
+			$model->idKab=$_POST['kab_id'];
+
+		if(isset($_POST['kec_id']))
+			$model->idKec=$_POST['kec_id'];
+
+		if(isset($_POST['desa_id']))
+			$model->idDesa=$_POST['desa_id'];
+
+		$model->status_terima_prov = 1;
+		$model->kirim_ipds = 0;
+
+		$this->render('cetak',array(
+			'model'=>$model,
+		));
 	}
 	
 	public function actionUser()

@@ -145,6 +145,56 @@ class MBs extends CActiveRecord
 		));
 	}
 
+
+	public function getCetak()
+	{
+		$where = "";
+
+		if($this->idKab!=null && $this->idKab!=0){
+			$where = "bs.idKab = '".$this->idKab."' AND ";
+		}
+
+		if($this->idKec!=null && $this->idKec!=0){
+			$where = "bs.idKec = '".$this->idKec."' AND ";
+		}
+
+		if($this->idDesa!=null && $this->idDesa!=0){
+			$where = "bs.idDesa = '".$this->idDesa."' AND ";
+		}
+
+		$sql = "SELECT bs.idKab, kab.nmKab, bs.idKec, kec.nmKec, bs.idDesa, desa.nmDesa, 
+				bs.nbs, bs.nks, bs.nks_sutas, bs.jml_terima_prov, bs.tgl_terima_prov 
+				FROM m_bs bs, 
+				m_kab kab, m_kec kec, m_desa desa
+				WHERE 
+				$where
+				status_terima_prov = 1 AND 
+				kirim_ipds = 0 AND 
+				kab.idKab = bs.idKab AND 
+				(kec.idKab = bs.idKab AND kec.idKec = bs.idKec) AND 
+				(desa.idKab = bs.idKab AND desa.idKec = bs.idKec AND desa.idDesa = bs.idDesa)";
+
+		$data =  Yii::app()->db->createCommand($sql)->queryAll();
+
+		// $result = array();
+		// foreach($data as $key=>$value){
+		// 	$result[] = array(
+		// 		'idKab' => $value['idKab'],
+		// 		'nmKab' => $value['nmKab'],
+		// 		'idKec' => $value['idKec'],
+		// 		'nmKec' => $value['nmKec'],
+		// 		'idDesa' => $value['idDesa'],
+		// 		'nmDesa' => $value['nmDesa'],
+		// 		'nbs' => $value['nbs'],
+		// 		'nks' => $value['nks'],
+		// 		'nks_sutas' => $value['nks_sutas'],
+		// 		'jml_terima_prov' => $value['jml_terima_prov']
+		// 	);
+		// }
+
+		return $data;
+	}
+
 	public function getLabelProv()
 	{
 		return "(16) SUMATERA SELATAN";
