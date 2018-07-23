@@ -19,6 +19,11 @@
                 <li><a href="<?php echo Yii::app()->createUrl('report/user'); ?>">Per Petugas Provinsi</a></li>
               </ul>
             </li>
+            <?php if(Yii::app()->user->getLevel()==3 || Yii::app()->user->getLevel()==1){ ?>
+            <li>
+              <a href="<?php echo Yii::app()->createUrl('report/cetak'); ?>" class="dropdown-toggle" data-toggle="dropdown">Cetak Pengiriman ke IPDS</a>
+            </li>
+            <?php } ?>
           </ul>
         </div>
       </div>
