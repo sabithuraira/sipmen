@@ -48,7 +48,7 @@
                         'enctype'=>'multipart/form-data',
                         ),
                     )); ?>
-                        <?php if($is_batch_baru){ ?>
+                        <?php if($model_bs->status_terima!=1){ ?>
                         <p class="note">Pastikan data yang anda import sudah sesuai dengan format yang ditetapkan dan tidak ada nomor urut RT yang terlewat</p>
 
                         <?php echo $form->errorSummary($model); ?>
