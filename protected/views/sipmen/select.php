@@ -42,7 +42,7 @@
             <div class="box box-success">
                 <div class="box-body">
 
-                    <?php if($is_batch_baru){ ?>
+                    <?php if($model_bs->status_terima!=1){ ?>
                     <?php $form=$this->beginWidget('CActiveForm', array(
                         'id'=>'login-form',
                         'enableClientValidation'=>true,
