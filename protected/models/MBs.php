@@ -324,6 +324,31 @@ class MBs extends CActiveRecord
 		return Yii::app()->db->createCommand($sql)->queryAll();
 	}
 
+	public function reset($id, $kab){
+		$model=$this->findByAttributes(array('nks_sutas'=>$id, 'idKab'=> $kab));
+		
+		if($model->nobatch!=''){
+			//delete ruta
+			$sql = "DELETE FROM m_ruta WHERE idKab='".$kab."' AND nobatch='".$model->nobatch."' ";
+			Yii::app()->db->createCommand($sql)->execute();
+
+			//delete batch
+			$model_batch = MBatch::model()->findByAttributes(array('idKab'=>$kab, 'nobatch'=>$model->nobatch));
+			$model_batch->status = 1;
+			$model_batch->save(false);
+		}
+
+		//reset bs
+		$sql = "UPDATE m_bs SET 
+			status_terima='', jml_terima=0, tgl_terima = '', 
+			status_edit='', jml_edit=0, jml_drop = 0, tgl_edit = '',
+			status_kirim='', jml_kirim=0, nmr_kirim = 0, tgl_kirim = '',
+			status_terima_prov='', jml_terima_prov=0, tgl_terima_prov = '', terima_by = 0
+			WHERE nks_sutas='".$id."' AND idKab='".$kab."' "; 
+
+		Yii::app()->db->createCommand($sql)->execute();
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

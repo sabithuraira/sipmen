@@ -33,6 +33,13 @@ class SipmenController extends Controller
 					return $user->getLevel()<=2;
 				},
 			),
+
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('reset'),
+				'expression'=> function($user){
+					return $user->getLevel()==1;
+				},
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('terimaprov'),
 				'expression'=> function($user){
@@ -97,7 +104,7 @@ class SipmenController extends Controller
         if(isset($_POST['listname']))
         {
             $model->importSutas($name,$_POST['listname'],$id, $kab);
-            	// $model->importPaguSatker($name,$_POST['listname']);
+            // $model->importPaguSatker($name,$_POST['listname']);
         }
 
         $this->render('select',array(
@@ -106,7 +113,12 @@ class SipmenController extends Controller
 			'model_bs'	=>$model_bs,
 			'is_batch_baru'	=>$is_batch_baru
         ));
-    }
+	}
+	
+	public function actionReset($id, $kab){
+		MBs::model()->reset($id,$kab);
+		$this->redirect(array('sipmen/terima','id'=>$id, 'kab'=>$kab));
+	}
     
 
 	public function actionTerima($id, $kab){

@@ -35,6 +35,10 @@
             </div>
             <!-- /.box-body -->
           </div>
+
+          <?php if(Yii::app()->user->getLevel()==1){ ?>
+            <a href="<?php echo Yii::app()->createUrl('sipmen/reset', array('id'=>$model_bs->nks_sutas, 'kab'=>$model_bs->idKab)); ?>" class="btn btn-danger btn-sm btn-block"><i class="fa fa-ambulance"></i> Reset Data</a>
+        <?php } ?>
         </div>
         <!-- /.col -->
 
@@ -80,7 +84,10 @@
 
                     <div class="form-group">
                         <?php echo "Jumlah Ruta"; ?>
-                        <?php if($is_batch_baru){ ?>
+                        <?php 
+                            //if($is_batch_baru){ 
+                            if($model_bs->status_terima!=1){
+                        ?>
                             <input type="number" id="jumlah_ruta" class="form-control"></input>
                             <input type="hidden" name="jumlah_ruta" v-model.number="jumlah_ruta"></input>
                             <input type="hidden" id="hid_jumlah_ruta" value="0"></input>
@@ -109,7 +116,8 @@
               <h3 class="box-title">Daftar Rumah Tangga Diterima</h3>
               <!-- /.box-tools -->
               <?php 
-                if(!$is_batch_baru){
+                // if(!$is_batch_baru){
+                if($model_bs->status_terima!=1){
                     echo '<div class="pull-right"><button type="button" id="btn_tambah" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Tambah Ruta</button></div>';
                 }
               ?>
@@ -121,7 +129,10 @@
                 <table class="table table-hover table-striped">
                   <tbody>
 
-                    <?php if($is_batch_baru){ ?>
+                    <?php 
+                        // if($is_batch_baru){ 
+                        if($model_bs->status_terima!=1){
+                    ?>
                         <tr v-for="(row, index) in jumlah_ruta">
                             <td><input type="number" :id="'noruta'+index" :name="'noruta'+index" class="form-control" placeholder="nomor ruta tani"></input></td>
                             <td><input type="text" :id="'nama'+index" :name="'nama'+index" class="form-control" placeholder="nama kepala ruta"></input></td>

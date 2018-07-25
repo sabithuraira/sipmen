@@ -47,7 +47,7 @@ class ReportController extends Controller
 
 	public function actionGet_list_cetak()
 	{
-		$model = new Mbs;
+		$model = new MBs;
 
 		if(isset($_POST['kab_id']))
 			$model->idKab=$_POST['kab_id'];

@@ -78,8 +78,6 @@ class FileForm extends CFormModel
 
         $sheetData = $objPHPExcel->getSheet($sheet)->toArray(null,true,true,true);
 
-        //create sheet name in table function if not exist
-        
         $sheetname=$this->getSheetnameByIndex($name,$sheet);
 
         $model_bs=MBs::model()->findByAttributes(array('nks_sutas'=>$id, 'idKab'=> $kab));
@@ -111,9 +109,9 @@ class FileForm extends CFormModel
                 if($key==2){
                     if(isset($value['B']) && strlen($value['B'])>0)
                     {
-                        if($is_batch_baru){
+                        // if($is_batch_baru){
                             $jumlah_ruta = $value['B'];
-                        }
+                        // }
                     }
                     else{
                         $is_validate = false;
@@ -134,26 +132,36 @@ class FileForm extends CFormModel
         }
 
         if($is_validate){
-            $model = new MBatch;
-            $model->idProv = $model_bs->idProv;
-            $model->idKab = $model_bs->idKab;
-            $model->nobatch = $nextBatch['label'];
-            $model->nomorbatch = $nextBatch['nomor'];
-            $model->status = '1';
-            if($model->save()){
+            if($is_batch_baru){
+                $model = new MBatch;
+                $model->idProv = $model_bs->idProv;
+                $model->idKab = $model_bs->idKab;
+                $model->nobatch = $nextBatch['label'];
+                $model->nomorbatch = $nextBatch['nomor'];
+                $model->status = '1';
+
+                
+                if($model->save()){
+                    $model_bs->status_terima = 1;
+                    $model_bs->jml_terima = $jumlah_ruta;
+                    $model_bs->tgl_terima = date('Y-m-d');
+                    $model_bs->nobatch = $nextBatch['label'];
+                    $model_bs->nomorbatch = $nextBatch['nomor'];
+                    $model_bs->save(false);
+                }
+            }
+            else{
                 $model_bs->status_terima = 1;
                 $model_bs->jml_terima = $jumlah_ruta;
                 $model_bs->tgl_terima = date('Y-m-d');
-                $model_bs->nobatch = $model->nobatch;
-                $model_bs->nomorbatch = $model->nomorbatch;
                 $model_bs->save(false);
             }
 
             for($i=0;$i<$jumlah_ruta;++$i){
                 $model_ruta = new MRuta;
-                $model_ruta->idProv = $model->idProv;
-                $model_ruta->idKab	= $model->idKab;
-                $model_ruta->nobatch = $model->nobatch;
+                $model_ruta->idProv = $model_bs->idProv;
+                $model_ruta->idKab	= $model_bs->idKab;
+                $model_ruta->nobatch = $nextBatch['label'];
                 $model_ruta->noruta = $this->numberTo3String($all_number[$i]);
                 if($all_name[$i]=='')
                     $model_ruta->namakrt = 'NN';
