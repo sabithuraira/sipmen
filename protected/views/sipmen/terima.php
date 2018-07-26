@@ -117,7 +117,7 @@
               <!-- /.box-tools -->
               <?php 
                 // if(!$is_batch_baru){
-                if($model_bs->status_terima!=1){
+                if($model_bs->status_terima==1){
                     echo '<div class="pull-right"><button type="button" id="btn_tambah" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Tambah Ruta</button></div>';
                 }
               ?>
