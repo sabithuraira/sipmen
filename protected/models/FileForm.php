@@ -172,6 +172,24 @@ class FileForm extends CFormModel
                 $model_ruta->ket_status = '';
                 $model_ruta->save();
             }
+
+            if($jumlah_ruta==0){
+				$model_bs->status_edit ='1';
+				$model_bs->jml_edit =0;
+				$model_bs->jml_drop = 0;
+                $model_bs->tgl_edit = date('Y-m-d');
+                
+				$model_bs->status_kirim ='1';
+				$model_bs->jml_kirim =0;
+                $model_bs->tgl_kirim = date('Y-m-d');
+                
+				$model_bs->status_terima_prov ='1';
+				$model_bs->jml_terima_prov =0;
+				$model_bs->tgl_terima_prov = date('Y-m-d');
+				$model_bs->terima_by = Yii::app()->user->id;
+
+				$model_bs->save(false);
+            }
         }
 
         unlink(Yii::getPathOfAlias('webroot')."/upload/temp/".$name.".xlsx");
