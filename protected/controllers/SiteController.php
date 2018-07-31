@@ -37,6 +37,9 @@ class SiteController extends Controller
 		if(isset($_POST['desa_id']))
 			$model->idDesa=$_POST['desa_id'];
 
+		if(isset($_POST['is_terima']))
+			$model->status_terima_prov=$_POST['is_terima'];
+
 		$this->render('index',array(
 			'model'=>$model,
 		));

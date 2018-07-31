@@ -146,8 +146,20 @@ class MBs extends CActiveRecord
 		$criteria->compare('jml_kirim',$this->jml_kirim);
 		$criteria->compare('nmr_kirim',$this->nmr_kirim);
 		$criteria->compare('tgl_kirim',$this->tgl_kirim,true);
+
+		// $criteria->compare('status_terima_prov',$this->status_terima_prov,true);
 		$criteria->compare('nobatch',$this->nobatch,true);
 		$criteria->compare('nomorbatch',$this->nomorbatch);
+
+		if($this->status_terima_prov==0 && $this->status_terima_prov!=''){
+			// print_r($this);
+			// print_r("satu");die();
+			$criteria->addCondition('status_terima_prov<>1');
+		}
+		else if($this->status_terima_prov==1){
+			// print_r("dua");die();
+			$criteria->addCondition('status_terima_prov=1');
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -55,6 +55,15 @@
                         array('empty'=>'- Desa -', 'class'=>'form-control'));
                   ?>
                 </li>
+
+                
+                <li>
+                  <?php
+                    echo CHtml::dropDownList("is_terima", $model->status_terima_prov,
+                        array(0=>'Belum Terima Prov', 1=>'Sudah Terima Prov'),
+                        array('empty'=>'- Semua Data -', 'class'=>'form-control'));
+                  ?>
+                </li>
               </ul>
             </div>
             <!-- /.box-body -->
