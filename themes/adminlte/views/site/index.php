@@ -173,7 +173,7 @@
                       array(
                         'header' =>'PENERIMAAN PROVINSI',
                         'type'=>'raw',
-                        'value'		=> function($data){ return $data->statusTerimaProvLabel."<br/>Jumlah: ".$data->jml_terima_prov."<br/> Tanggal: ".$data->tgl_terima_prov."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('sipmen/terimaprov', 'id'=>$data->nks_sutas, 'kab'=>$data->idKab)).'</div>'; },
+                        'value'		=> function($data){ return $data->statusTerimaProvLabel."<br/>Jumlah: ".$data->jml_terima_prov."<br/> Tanggal: ".$data->tgl_terima_prov.$data->penerimaName."</br><div class='text-center link-progres'>".CHtml::link("INPUT", array('sipmen/terimaprov', 'id'=>$data->nks_sutas, 'kab'=>$data->idKab)).'</div>'; },
                       ),
                       array(
                         'header' =>'BATCH',

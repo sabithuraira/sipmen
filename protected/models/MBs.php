@@ -67,7 +67,16 @@ class MBs extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'penerima' => array(self::BELONGS_TO, 'User', 'terima_by'),
 		);
+	}
+
+	public function getPenerimaName(){
+		if($this->terima_by!=0){
+			return "<br/> Receiving Oleh: <b>(".($this->penerima->username).")</b>";
+		}
+
+		return "";
 	}
 
 	/**
@@ -244,6 +253,13 @@ class MBs extends CActiveRecord
 			return '<div class="label bg-red">BELUM TERIMA PROV</div>';
 		else 
 			return '<div class="label bg-green">SUDAH TERIMA PROV</div>';
+	}
+
+	//when user delete a RUTA on terima process, it will update all number of terima, edit, kirim & terima_prov
+	public function updateJumlah(){
+		$total_terima_prov = MRuta::model()->countByAttributes(array(
+			''
+		));
 	}
 
 	public function getRekap($id_kab=null, $id_kec=null, $id_desa= null){
