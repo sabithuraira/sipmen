@@ -98,7 +98,27 @@
                         </tr>
 
                         <?php
+                          $total_bs = 0;
+                          $total_terima = 0;
+                          $total_terima_ruta = 0;
+                          $total_kirim = 0;
+                          $total_kirim_ruta = 0;
+                          $total_editing = 0;
+                          $total_editing_ruta = 0;
+                          $total_terima_prov = 0;
+                          $total_terima_prov_ruta = 0;
+
                             foreach($data as $key=>$value){
+
+                                $total_bs += $value['total_bs'];
+                                $total_terima += $value['terima'];
+                                $total_terima_ruta += $value['terima_ruta'];
+                                $total_kirim += $value['kirim'];
+                                $total_kirim_ruta += $value['kirim_ruta'];
+                                $total_editing += $value['editing'];
+                                $total_editing_ruta += $value['editing_ruta'];
+                                $total_terima_prov += $value['terima_prov'];
+                                $total_terima_prov_ruta += $value['terima_prov_ruta'];
                                 echo '<tr>';
                                     echo '<td>('.$value['kode'].') '.$value['nama'].'</td>';
                                     echo '<td>'.$value['total_bs'].'</td>';
@@ -109,6 +129,15 @@
                                 echo '</tr>';
                             }
                         ?>
+
+                        <tr>
+                            <th>TOTAL</th>
+                            <th><?php echo $total_bs; ?></th>
+                            <th><?php echo $total_terima.' / '.$total_terima_ruta; ?></th>
+                            <th><?php echo $total_editing.' / '.$total_editing_ruta; ?></th>
+                            <th><?php echo $total_kirim.' / '.$total_kirim_ruta; ?></th>
+                            <th><?php echo $total_terima_prov.' / '.$total_terima_prov_ruta; ?></th>
+                        </tr>
                 </table>
 
               </div>
