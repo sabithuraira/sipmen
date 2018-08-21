@@ -278,9 +278,13 @@ class MBs extends CActiveRecord
 		$select = '
 				sum(1) as total_bs,
 				sum(case status_terima when 1 then 1 else 0 end) as terima,
+				sum(case status_terima when 1 then jml_terima else 0 end) as terima_ruta,
 				sum(case status_edit when 1 then 1 else 0 end) as editing,
+				sum(case status_edit when 1 then jml_edit else 0 end) as editing_ruta,
 				sum(case status_kirim when 1 then 1 else 0 end) as kirim,
-				sum(case status_terima_prov when 1 then 1 else 0 end) as terima_prov';
+				sum(case status_kirim when 1 then jml_kirim else 0 end) as kirim_ruta,
+				sum(case status_terima_prov when 1 then 1 else 0 end) as terima_prov,
+				sum(case status_terima_prov when 1 then jml_terima_prov else 0 end) as terima_prov_ruta';
 
 		$sql = "SELECT k.idKab as kode, k.nmKab as nama, $select
 			FROM `m_bs` bs, m_kab k WHERE 

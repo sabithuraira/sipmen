@@ -91,10 +91,10 @@
                         <tr>
                             <th>Wilayah</th>
                             <th>Jumlah BS</th>
-                            <th>Terima TU</th>
-                            <th>Editing</th>
-                            <th>Kirim Prov</th>
-                            <th>Terima Provinsi</th>
+                            <th>Terima TU (L1/L2)</th>
+                            <th>Editing (L1/L2)</th>
+                            <th>Kirim Prov (L1/L2)</th>
+                            <th>Terima Provinsi (L1/L2)</th>
                         </tr>
 
                         <?php
@@ -102,10 +102,10 @@
                                 echo '<tr>';
                                     echo '<td>('.$value['kode'].') '.$value['nama'].'</td>';
                                     echo '<td>'.$value['total_bs'].'</td>';
-                                    echo '<td>'.$value['terima'].'</td>';
-                                    echo '<td>'.$value['editing'].'</td>';
-                                    echo '<td>'.$value['kirim'].'</td>';
-                                    echo '<td>'.$value['terima_prov'].'</td>';
+                                    echo '<td>'.$value['terima'].' / '.$value['terima_ruta'].'</td>';
+                                    echo '<td>'.$value['editing'].' / '.$value['editing_ruta'].'</td>';
+                                    echo '<td>'.$value['kirim'].' / '.$value['kirim_ruta'].'</td>';
+                                    echo '<td>'.$value['terima_prov'].' / '.$value['terima_prov_ruta'].'</td>';
                                 echo '</tr>';
                             }
                         ?>

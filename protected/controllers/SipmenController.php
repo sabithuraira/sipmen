@@ -28,7 +28,7 @@ class SipmenController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('terima','edit', 'kirim', 'import', 'selecttab'),
+				'actions'=>array('terima','edit', 'kirim', 'import', 'selecttab', 'delete_ruta'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -50,6 +50,37 @@ class SipmenController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionDelete_ruta($batch, $kab, $noruta)
+	{
+		$satu='false';
+
+		$data = MRuta::model()->findByAttributes(array(
+			'idKab'		=>$kab,
+			'nobatch'	=>$batch,
+			'noruta'	=>$this->numberTo3String($noruta)//$noruta
+		));
+
+		$model_bs = MBs::model()->findByAttributes(array(
+			'idKab'	=>$kab,
+			'nobatch'	=>$batch
+		));
+
+		if($model_bs!=null){
+			$model_bs->updateJumlah();
+		}
+
+		if($data!=null){
+			$data->delete();
+			$satu = 'true';
+		}
+
+		echo CJSON::encode(array
+		(
+			'satu'=>$satu,
+		));
+		Yii::app()->end();
 	}
 	
 	public function actionImport($id, $kab)

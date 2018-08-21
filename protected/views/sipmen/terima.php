@@ -1,4 +1,5 @@
 <div id="terima_tag">
+    <div class="pop-loading"></div>
       <div class="row">
         <div class="col-md-3">
           <div class="box box-solid">
@@ -39,6 +40,7 @@
           <?php if(Yii::app()->user->getLevel()==1){ ?>
             <a href="<?php echo Yii::app()->createUrl('sipmen/reset', array('id'=>$model_bs->nks_sutas, 'kab'=>$model_bs->idKab)); ?>" class="btn btn-danger btn-sm btn-block"><i class="fa fa-ambulance"></i> Reset Data</a>
         <?php } ?>
+            <br/>
         </div>
         <!-- /.col -->
 
@@ -80,6 +82,7 @@
                     <div class="form-group">
                         <?php echo "Nomor Batch"; ?>
                         <input type="text" value="<?php echo $nextBatch['label'] ?>" id="no_batch" name="no_batch" class="form-control" disabled></input>
+                        <input type="hidden" value="<?php echo $model_bs->idKab; ?>" id="idKab"></input>
                     </div>
 
                     <div class="form-group">
@@ -155,12 +158,12 @@
                             if($existing_ruta!=null){
                                 echo '<tr><td><input type="number" value="'.$existing_ruta->noruta.'" id="noruta'.$i.'" name="noruta'.$i.'" class="form-control" placeholder="nomor ruta tani"></input></td>';
                                 echo '<td><input type="text" value="'.$existing_ruta->namakrt.'" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="nama kepala ruta"></input></td>';
-                                echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                                echo '<td><button type="button" data-nomor="'.$existing_ruta->noruta.'" class="delete-ruta btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
                                 echo '</tr>';
                             }else{
                                 echo '<tr><td><input type="number" id="noruta'.$i.'" name="noruta'.$i.'" class="form-control" placeholder="nomor ruta tani"></input></td>';
                                 echo '<td><input type="text" id="nama'.$i.'" name="nama'.$i.'" class="form-control" placeholder="nama kepala ruta"></input></td>';
-                                echo '<td><button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
+                                echo '<td><button type="button" data-nomor="0" class="delete-ruta btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>';
                                 echo '</tr>'; 
                             }
                         }
